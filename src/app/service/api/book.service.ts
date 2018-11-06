@@ -12,17 +12,21 @@
 /* tslint:disable:no-unused-variable member-ordering */
 
 import {Inject, Injectable, Optional} from '@angular/core';
-import {HttpHeaders, HttpResponse, HttpEvent, HttpClient} from '@angular/common/http';
+import {
+    HttpClient, HttpHeaders,
+    HttpResponse, HttpEvent, HttpParams
+} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Book} from '..';
 import {BASE_PATH} from '../variables';
 import {Configuration} from '../configuration';
+import {environment} from "../../../environments/environment";
 
 
 @Injectable()
 export class BookService {
 
-    protected basePath = 'http://localhost:8080/api';
+    protected basePath = 'http://localhost:8080/firstApp-1.0/api';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -137,9 +141,6 @@ export class BookService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteBook(id: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public deleteBook(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public deleteBook(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public deleteBook(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteBook.');
@@ -156,6 +157,9 @@ export class BookService {
 
         // to determine the Content-Type header
         let consumes: string[] = [];
+
+        const params = new HttpParams().set('id', '1');
+
 
         return this.httpClient.delete<any>(`${this.basePath}/books/${encodeURIComponent(String(id))}`,
             {
@@ -178,7 +182,6 @@ export class BookService {
     public getBook(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Book>>;
     public getBook(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Book>>;
     public getBook(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getBook.');
         }

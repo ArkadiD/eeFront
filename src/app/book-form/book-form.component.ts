@@ -1,24 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Book, BookService} from '../service';
+import 'rxjs/Rx';
 
 @Component({
-  selector: 'bs-book-form',
-  templateUrl: './book-form.component.html',
-  styles: []
+    selector: 'bs-book-form',
+    templateUrl: './book-form.component.html',
+    styles: []
 })
 export class BookFormComponent implements OnInit {
 
-    private book = {
-        title: "dummy title",
-        description: "dummy description",
-        unitCost: "123",
-        nbOfPages:"234",
-        imageURL: "http://ecx.images-amazon.com/images/I/51baRLwlufL._SL160_.jpg",
-        language: "0"
-    };
+    private book: Book = new Book();
 
-  constructor() { }
+    constructor(private router: Router, private bookService: BookService) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
+    create() {
+        this.bookService.createBook(this.book)
+            .finally(() => this.router.navigate(['/book-list']))
+            .subscribe();
+    }
 }
+

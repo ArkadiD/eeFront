@@ -1,22 +1,22 @@
 <h2>Create a new book</h2>
-<form>
+<form (ngSubmit)="create()">
     <div class="form-group row">
         <label class="col-2 col-form-label">Title</label>
         <div class="col-10">
-      <input class="form-control" type="text" [(ngModel)]="book.title" name="title">
+            <input class="form-control" type="text" [(ngModel)]="book.title" name="title">
         </div>
     </div>
     <div class="form-group row">
         <label class="col-2 col-form-label">Description</label>
         <div class="col-10">
-      <textarea class="form-control" rows="3" [(ngModel)]="book.description" name="description"></textarea>
+            <textarea class="form-control" rows="3" [(ngModel)]="book.description" name="description"></textarea>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-2 col-form-label">Unit cost</label>
         <div class="col-10">
             <div class="input-group">
-        <input class="form-control" type="number" [(ngModel)]="book.unitCost" name="unitCost">
+                <input class="form-control" type="number" [(ngModel)]="book.unitCost" name="unitCost">
                 <span class="input-group-addon">$</span>
             </div>
         </div>
@@ -24,19 +24,19 @@
     <div class="form-group row">
         <label class="col-2 col-form-label">Number of pages</label>
         <div class="col-10">
-      <input class="form-control" type="number" [(ngModel)]="book.nbOfPages" name="nbOfPages">
+            <input class="form-control" type="number" [(ngModel)]="book.nbOfPages" name="nbOfPages">
         </div>
     </div>
     <div class="form-group row">
         <label class="col-2 col-form-label">Image URL</label>
         <div class="col-10">
-      <input class="form-control" type="url" [(ngModel)]="book.imageURL" name="imageURL">
+            <input class="form-control" type="url" [(ngModel)]="book.imageURL" name="imageURL">
         </div>
     </div>
     <div class="form-group row">
         <label class="col-2 col-form-label">Language</label>
         <div class="col-10">
-      <select class="form-control" [(ngModel)]="book.language" name="language">
+            <select class="form-control" [(ngModel)]="book.language" name="language">
                 <option value="">Select</option>
                 <option value="0">ENGLISH</option>
                 <option value="1">FRENCH</option>
